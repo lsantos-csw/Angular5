@@ -1,0 +1,117 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0F0F0F;
+  background-size: 100%;
+  background-image: -moz-linear-gradient(0deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+  background-image: -webkit-linear-gradient(0deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+  background-image: linear-gradient(90deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+  background-size: 100px 100px;
+}
+
+/* Timeline - Events */
+.timeline-events {
+  //position: absolute;
+  //top: 170px;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  /* Fix display: inline-block spacing issue */
+  font-size: 0;
+	//margin-top: 5px;
+}
+
+.timeline-events p,
+.timeline-events h2,
+.timeline-events h3,
+.timeline-events h4 {
+	margin: 0 0 1px 0;
+	font-weight: normal;
+	font-size: 11px;
+	bottom: 10px;
+	position: absolute;
+}
+.timeline-events h2 {
+	color: #777;
+	text-transform: uppercase;
+}
+.timeline-events h4 {
+	color: #fff;
+	font-style: italic;
+}
+
+.timeline-events li {
+  position: relative;
+  display: inline-block;
+}
+
+.timeline-events li:before {
+  left: 0;
+  bottom: 0px;
+  //border-radius: 8px;
+  content: '';
+}
+
+.box, .box:before{
+	height: .5rem
+}
+
+@mixin price-style($color, $height) {
+	color: $color;
+	background: $color;
+	background-color: $color;
+	padding-top: $height;
+	padding-bottom: $height;
+	height: 0 !important;
+}
+
+@mixin half-circle($inline, $side) {
+	$otherSide: if($side == 'right', 'left', 'right');
+	bottom: -0.15rem;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	float: inline-#{$inline};
+	border-#{$side}: 0;
+	#{$side}: 0;
+	border-bottom-#{$otherSide}-radius: 500px;
+	border-top-#{$otherSide}-radius: 500px;
+	position: absolute;
+	width: 0.2rem;
+	height: 0.4rem !important;
+}
+
+$line-height: 0.1rem;
+
+.actualPrice, .actualPrice:before{
+	@include price-style(#3f51b5, $line-height)
+}
+
+.approval {
+	float: right;
+	@include price-style(#dbce5a, 0.15rem)
+}
+
+.pastPrice, .pastPrice:before{
+	@include price-style(#c8c7c7, 0.03rem)
+}
+
+.futurePrice, .futurePrice:before{
+	@include price-style(#b7cf9f, $line-height)
+}
+
+.half-circle-left {
+
+	@include half-circle('start', 'left')
+}
+
+.half-circle-right {
+	@include half-circle('end', 'right')
+}
+
+.timeline-event,
+.timeline-event:before {
+  display: block;
+	width:100%;
+}
