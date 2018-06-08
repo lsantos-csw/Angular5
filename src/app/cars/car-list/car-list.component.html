@@ -1,0 +1,44 @@
+<!-- <div>
+  <div *ngFor="let car of cars">
+    <app-car [carName]="car.car_name" [start_date]="start_date" [end_date]="end_date" [carInformation]="car.carInformation"></app-car>
+  </div>
+  <button type="button" (click)="buttonDown()">-</button>
+  <button type="button" (click)="buttonUp()">+</button>
+</div> -->
+<div class="full-size">
+  <div style="height:80%">
+    <app-draggable-divs [sidebarWidth]="sidebarWidth" [bodyWidth]="bodyWidth">
+      <app-drop sidebar [isHidden]="true" [shouldHide]="true" *ngFor="let car of cars" [id]="car.id" [toggleToo]="car.model + '' + car.id" (clickEmitter)="onToggle($event)">
+        <div top>
+          <div class="names car-names">
+            <p class="text">
+              <fa name="cog" animation="spin"></fa>{{car.model}}
+            </p>
+          </div>
+        </div>
+        <div bottom>
+          <div *ngFor="let submodel of car.sub_models" class="names car-names">
+            <p class="text">
+              <fa name="cog" animation="spin"></fa>{{submodel.name}}
+            </p>
+          </div>
+        </div>
+      </app-drop>
+      <div body>
+        <app-drop sidebar [isHidden]="show.get(car.id)" [shouldHide]="false" *ngFor="let car of cars" >
+          <div top>
+            <div class="names car-names">
+            </div>
+          </div>
+          <div bottom [attr.id]="car.model + car.id">
+            <div class="names" *ngFor="let submodel of car.sub_models">
+              <app-timeline [start_date]="start_date" [end_date]="end_date" [inputData]="submodel.price_info"></app-timeline>
+            </div>
+          </div>
+        </app-drop>
+      </div>
+    </app-draggable-divs>
+    <button id="buttonDown" type="button" (click)="buttonDown()">-</button>
+    <button id="buttonUp" type="button" (click)="buttonUp()">+</button>
+  </div>
+</div>

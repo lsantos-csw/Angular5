@@ -1,0 +1,14 @@
+$border-width: 0.01em;
+
+
+.names {
+  white-space: nowrap;
+  border-bottom: $border-width solid #dddddd;
+  height: 47px;
+  //border-top: $border-width solid #dddddd;
+}
+
+.text {
+  margin: 10px;
+  float: left;
+}

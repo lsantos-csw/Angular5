@@ -1,0 +1,256 @@
+// colors
+$incomplete: #bbb !default;
+$complete: #65d074 !default;
+$active: #337AB7 !default;
+$hover: #5671d0 !default;
+$step-danger: #d3140f !default;
+$step-warning: #edb10a !default;
+$step-info: #5b32d6 !default; // sizing
+$bubble-size: 6px !default;
+$bubble-line-thickness: 0.16em !default;
+$bubble-line-thickness2: 0.2em !default;
+$border-thickness: 1px !default;
+$darken-amount: 30% !default; // misc
+
+body {
+  //font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  margin: 0px;
+  //padding: 20px;
+}
+
+.container {
+  font-size: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #406753;
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+}
+
+a:hover {
+  color: black;
+  border-color: black;
+}
+
+hr {
+  opacity: 0.3;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h3 {
+  border-left: 12px solid #f1f1f1;
+  text-indent: 1em;
+  color: #999;
+  margin-top: 2em;
+  font-weight: 100;
+}
+
+ul {
+  margin: 0;
+  padding: 0.4em;
+  list-style-type: square;
+}
+
+li {
+  padding-left: 0.5em;
+  line-height: 1em;
+}
+
+code {
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  background-color: #f1f1f1;
+  font-size: 70%;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.subdued {
+  font-size: 80%;
+  opacity: 0.6;
+}
+
+.opaque {
+  opacity: 0;
+}
+@mixin bubble-style($color) {
+  background-color: $color;
+  color: $color;
+  border-color: darken($color, $darken-amount);
+
+  &:after,
+  &:before {
+    background-color: $color;
+    border-color: darken($color, $darken-amount);
+  }
+}
+@mixin events() {
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  /* Fix display: inline-block spacing issue */
+  > li .text-container {
+    margin: 0;
+    padding: 1px;
+    //display: inline-block;
+    text-decoration: none;
+    //float: left;
+  }
+
+  > li {
+    position: relative;
+    display: inline-block;
+    padding-left: 0 !important;
+
+    &:hover {
+      color: darken($incomplete, $darken-amount);
+    }
+  }
+
+  > li .bubble {
+    border-radius: 1000px;
+    width: $bubble-size;
+    height: $bubble-size;
+    float: left;
+    display: block;
+    clear: both;
+    margin: 0 auto 0.5em;
+    //border-bottom: $border-thickness solid darken($incomplete, 20%);
+  }
+
+  > li .bubble2 {
+    border-radius: 1000px;
+    float: left;
+    display: block;
+    clear: both;
+    margin: 0 auto 0.5em;
+    //border-bottom: $border-thickness solid darken($incomplete, 20%);
+  }
+
+  > li .bubble2:after {
+    display: block;
+    position: absolute;
+    top: $bubble-size / 2 - $border-thickness + 32;
+    width: 100%;
+    height: $bubble-line-thickness;
+    content: '';
+    //background-color: $incomplete;
+  }
+
+  > li:first-child .bubble {
+    border-radius: 1000px;
+    width: $bubble-size;
+    height: $bubble-size;
+    z-index: -10;
+    background-color: white !important;
+    //border-bottom: $border-thickness solid white;
+    clear: both;
+    float: left;
+    display: block;
+    //border-bottom: $border-thickness solid darken($incomplete, 20%);
+  }
+
+  > li .bubble:after {
+    display: block;
+    position: absolute;
+    top: $bubble-size / 2 - $border-thickness + 36;
+    width: 100%;
+    height: $bubble-line-thickness2;
+    content: '';
+    //background-color: $incomplete;
+  }
+
+  > li .bubble:before,
+  li .bubble2:before {
+    left: 0;
+  }
+
+  > li .bubble:after,
+  li .bubble2:after {
+    right: 0;
+  }
+
+  > li.completed {
+    color: $complete;
+
+    .bubble,
+    .bubble2 {
+      @include bubble-style($complete);
+    }
+  }
+  // current state
+  > li.active {
+    color: $active;
+
+    .bubble,
+    .bubble2 {
+      @include bubble-style($active);
+    }
+  }
+  // button states
+  > li a:hover .bubble,
+  li a:hover .bubble2 {
+    @include bubble-style($hover);
+  }
+  // override states
+  > li.danger .bubble,
+  li.danger .bubble2 {
+    @include bubble-style($step-danger);
+  }
+
+  > li.warning .bubble,
+  li.warning .bubble2 {
+    @include bubble-style($step-warning);
+  }
+
+  > li.info .bubble,
+  li.info .bubble2 {
+    @include bubble-style($step-info);
+  }
+}
+
+.backyellow,
+.backyellow:after,
+.backyellow:before {
+  background-color: yellow !important;
+}
+
+.backblue,
+.backblue:after,
+.backblue:before {
+  background-color: STEELBLUE !important;
+}
+
+.backgrey,
+.backgrey:after,
+.backgrey:before {
+  background-color: #DDDDDD !important;
+}
+
+.backgreen,
+.backgreen:after,
+.backgreen:before {
+  background-color: PALEGREEN !important;
+}
+
+.timeline-events-upper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include events();
+}
+
+.timeline-events {
+  position: relative;
+  @include events();
+}

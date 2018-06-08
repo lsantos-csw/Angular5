@@ -1,0 +1,31 @@
+
+  <div class="container" style="position:relative">
+
+    <ul class="timeline-events-upper">
+      <li class="warning" *ngFor="let data of toApprove" [style.width.%]="data.width">
+        <div>
+          <div class="text-container">
+            <div [ngClass]="{opaque: (data.prices === undefined || data.prices === null) || data.prices.length <= (pricesSizes - i - 1) }" *ngFor="let in of counter(pricesSizes) ;let i = index" style="width:0px">
+              {{(data.prices === undefined || data.prices === null) || data.prices.length
+              <=( pricesSizes - i - 1) ? '_' : data.prices[pricesSizes - i - 1]}} </div>
+            </div>
+
+            <div>
+              <div class="bubble2" [ngClass]="{opaque: data.color === 'opaque', backyellow: data.color==='yellow'}"></div>
+            </div>
+          </div>
+      </li>
+    </ul>
+    <ul class="timeline-events">
+      <li class="warning" *ngFor="let data of timelineData" [style.width.%]="data.width">
+        <div>
+          <div [ngClass]="{opaque: (data.prices === undefined || data.prices === null) || data.prices.length <= (pricesSizes - i - 1) }" *ngFor="let in of counter(pricesSizes) ;let i = index" class="text-container" style="width:0px">
+            {{(data.prices === undefined || data.prices === null) || data.prices.length
+            <=( pricesSizes - i - 1) ? '_' : data.prices[pricesSizes - i - 1]}} </div>
+
+              <div class="bubble" [ngClass]="{backblue: data.color === 'blue', backyellow: data.color==='yellow', backgrey: data.color === 'grey', backgreen: data.color === 'green'}">
+              </div>
+          </div>
+      </li>
+    </ul>
+    </div>

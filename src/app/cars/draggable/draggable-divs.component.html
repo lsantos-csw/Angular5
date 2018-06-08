@@ -1,0 +1,29 @@
+<div #container id="container-draggable" class="full-size" appDraggable>
+  <div id="full-scrollable">
+    <div (scroll)="onScroll($event, 'sidebar-scrollable')" id="sidebar-scrollable">
+      <div id="part1" class="sidebar" [style.width.%]="sidebarWidth">
+        <!-- //<div (scroll)="onScroll($event, 'sidebar-scrollable')" id="sidebar-scrollable"> -->
+        <ng-content select="[sidebar]"> </ng-content>
+        <!-- /</div> -->
+      </div>
+      <div class="divider">
+        <div class="mover-container">
+          <app-mover></app-mover>
+        </div>
+      </div>
+      <div class="body" id="part2" [style.width.%]="bodyWidth" (scroll)="onScroll($event, 'part2')">
+        <ng-content select="[body]"> </ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div style="position:relative">
+  <div style="width:19%;display: inline-block;">
+    {{carName}}
+  </div>
+  <div style="width:80%;display: inline-block; border" class="box">
+    <app-timeline [start_date]="start_date" [end_date]="end_date" [inputData]="carInformation"></app-timeline>
+  </div>
+</div> -->

@@ -1,0 +1,8 @@
+<div>
+  <div (click)="toggle(); onClick($event)" style="position: relative" >
+    <ng-content select="[top]"></ng-content>
+  </div>
+  <div [hidden]="isHidden">
+    <ng-content select="[bottom]"> </ng-content>
+  </div>
+</div>
