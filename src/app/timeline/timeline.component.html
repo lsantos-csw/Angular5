@@ -1,22 +1,32 @@
-<div class="box" style="height:50px" >
-</div>
-<div>
-<div class="box" >
-  <ul class="timeline-events">
-    <li *ngFor="let td of toApprove" [style.width.%]="td.width" class="timeline-event approval">
-    <h2 >{{td.prices[0]}}</h2>
-    </li>
-  </ul>
-</div>
-<div class="box" >
-  <ul class="timeline-events">
-    <li *ngFor="let td of timelineData" [style.width.%]="td.width" class="timeline-event" [ngClass]="{'actualPrice' : td.state === 'CURRENT',
-      'pastPrice': td.state === 'PAST', 'futurePrice' : td.state === 'FUTURE'}">
-      <a *ngIf="!td.isFirstElement" class="half-circle-left" [ngClass]="{'actualPrice' : td.state === 'CURRENT',
-        'pastPrice': td.state === 'PAST', 'futurePrice' : td.state === 'FUTURE'}"></a>
-      <a *ngIf="!td.isLastElement" class="half-circle-right actualPrice" [ngClass]="{'actualPrice' : td.state === 'CURRENT' || 'PAST', 'futurePrice' : td.state === 'FUTURE'}"></a>
-      <p>{{td.prices[0]}}</p>
-    </li>
-  </ul>
-</div>
-</div>
+
+  <div class="container" style="position:relative">
+    <ul class="timeline-events-upper">
+      <li class="warning" *ngFor="let data of toApprove" [style.width.%]="data.width">
+        <div>
+          <div class="text-container" >
+            <div [ngClass]="{opaque: (data.prices === undefined || data.prices === null) || data.prices.length <= (pricesSizes - i - 1) }"
+              *ngFor="let in of counter(pricesSizes) ;let i = index" style="width:0px">
+              {{(data.prices === undefined || data.prices === null) || data.prices.length
+              <=( pricesSizes - i - 1) ? '_' : data.prices[pricesSizes - i - 1]}}
+            </div>
+          </div>
+
+          <div>
+            <div class="bubble2" [ngClass]="{opaque: data.color === 'opaque'}"></div>
+          </div>
+          </div>
+      </li>
+    </ul>
+    <ul class="timeline-events">
+      <li class="warning" *ngFor="let data of timelineData" [style.width.%]="data.width">
+        <div>
+          <div [ngClass]="{opaque: (data.prices === undefined || data.prices === null) || data.prices.length <= (pricesSizes - i - 1) }" *ngFor="let in of counter(pricesSizes) ;let i = index" class="text-container" style="width:0px">
+            {{(data.prices === undefined || data.prices === null) || data.prices.length
+            <=( pricesSizes - i - 1) ? '_' : data.prices[pricesSizes - i - 1]}} </div>
+
+              <div class="bubble" [ngClass]="{backblue: data.color === 'blue', backgrey: data.color === 'grey', backgreen: data.color === 'green'}">
+              </div>
+          </div>
+      </li>
+    </ul>
+    </div>

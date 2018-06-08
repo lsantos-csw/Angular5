@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto|Roboto+Condensed');
+
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+html {
+  height: 100%;
+}
+.full-size {
+  width:100%;
+  height:100%;
+}
